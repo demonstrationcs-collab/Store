@@ -17,6 +17,6 @@ jobs:
       - name: Upload IPA to TestFlight
         run: |
           fastlane pilot upload \
-            --ipa ./Privilege Club.ipa \
+            --ipa ./build/PrivilegeClub.ipa \
             --api_key_path ./AppStoreConnectKey.json \
             --skip_waiting_for_build_processing true
