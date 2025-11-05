@@ -1,0 +1,22 @@
+name: Upload IPA to TestFlight
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v3
+
+      - name: Install fastlane
+        run: sudo gem install fastlane
+
+      - name: Upload IPA to TestFlight
+        run: |
+          fastlane pilot upload \
+            --ipa ./Privilege Club.ipa \
+            --api_key_path ./AppStoreConnectKey.json \
+            --skip_waiting_for_build_processing true
