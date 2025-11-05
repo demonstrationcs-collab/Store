@@ -11,8 +11,8 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v3
 
-      - name: Install fastlane
-        run: sudo gem install fastlane
+      - name: Install latest Fastlane
+        run: sudo gem install fastlane --pre --no-document
 
       - name: Upload IPA to TestFlight
         run: |
