@@ -9,7 +9,13 @@ jobs:
 
     steps:
       - name: Checkout project
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        
+        # Installe une version stable de Ruby
+        - uses: ruby/setup-ruby@v1
+        with:
+        ruby-version: 3.2.2   # ✅ fonctionne avec Fastlane
+        bundler-cache: true
 
       - name: Install latest Fastlane
         run: sudo gem install fastlane --pre --no-document
