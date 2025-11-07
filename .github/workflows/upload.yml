@@ -11,15 +11,23 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
-      # ⚙️ Utiliser Ruby 3.1.x (plus stable avec Fastlane/OpenSSL)
-      - name: Setup Ruby
+      - name: Setup Ruby (3.1.4)
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.4
           bundler-cache: true
 
-      - name: Install latest Fastlane
-        run: sudo gem install fastlane --no-document
+      # 🧩 Installer une version stable de fastlane compatible OpenSSL
+      - name: Install compatible Fastlane
+        run: |
+          sudo gem uninstall fastlane -aIx || true
+          sudo gem install fastlane -v 2.214.0 --no-document
+
+      - name: Verify versions
+        run: |
+          ruby -v
+          openssl version
+          fastlane --version
 
       - name: Upload IPA to TestFlight
         run: |
