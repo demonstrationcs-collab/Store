@@ -21,7 +21,7 @@ jobs:
       - name: Install compatible Fastlane
         run: |
           sudo gem uninstall fastlane -aIx || true
-          sudo gem install fastlane -v 2.214.0 --no-document
+          sudo gem install fastlane -v 2.228.0 --no-document
 
       - name: Verify versions
         run: |
