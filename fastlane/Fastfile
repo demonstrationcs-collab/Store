@@ -1,20 +1,12 @@
-default_platform(:ios)
+lane :upload do
+  app_store_connect_api_key(
+    key_id: ENV['APP_STORE_CONNECT_KEY_ID'],
+    issuer_id: ENV['APP_STORE_CONNECT_ISSUER_ID'],
+    key_filepath: "AuthKey.p8"
+  )
 
-platform :ios do
-  desc "Upload build to TestFlight"
-  lane :upload do
-    # Lecture des variables d'environnement injectées par GitHub
-    api_key_path = "AuthKey.p8"
-    api_key_id = ENV["APP_STORE_CONNECT_API_KEY_ID"]
-    issuer_id = ENV["APP_STORE_CONNECT_API_ISSUER_ID"]
-
-
-    # Envoi de l'IPA à TestFlight
-    upload_to_testflight(
-      ipa: "./build/PrivilegeClub.ipa",
-      skip_waiting_for_build_processing: true,
-      skip_submission: true,
-      distribute_external: false
-    )
-  end
+  upload_to_testflight(
+    ipa: "./build/PrivilegeClub.ipa",
+    skip_waiting_for_build_processing: true
+  )
 end
