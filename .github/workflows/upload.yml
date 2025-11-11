@@ -20,9 +20,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.4
-          bundler-cache: true
 
-      # 🧩 Installer Fastlane
+      # 🧩 Installer une version stable de Fastlane compatible OpenSSL
       - name: Install Fastlane
         run: |
           sudo gem uninstall fastlane -aIx || true
@@ -34,7 +33,7 @@ jobs:
           openssl version
           fastlane --version
 
-      # 🚀 Upload vers TestFlight
+      # 🚀 Uploader l'IPA vers TestFlight
       - name: Upload IPA to TestFlight
         run: |
-          bundle exec fastlane upload
+          fastlane upload
