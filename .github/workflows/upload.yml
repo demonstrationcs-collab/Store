@@ -7,6 +7,11 @@ jobs:
   upload:
     runs-on: macos-latest
 
+    env:
+      APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+      APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+      APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
@@ -16,13 +21,9 @@ jobs:
         with:
           ruby-version: 3.1.4
           bundler-cache: true
-                env:
-  APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-  APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
-  APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}  
 
-      # 🧩 Installer une version stable de fastlane compatible OpenSSL
-      - name: Install compatible Fastlane
+      # 🧩 Installer Fastlane
+      - name: Install Fastlane
         run: |
           sudo gem uninstall fastlane -aIx || true
           sudo gem install fastlane -v 2.228.0 --no-document
@@ -33,12 +34,7 @@ jobs:
           openssl version
           fastlane --version
 
-   
-
+      # 🚀 Upload vers TestFlight
       - name: Upload IPA to TestFlight
         run: |
-          fastlane pilot upload \
-            --ipa ./build/PrivilegeClub.ipa \
-            --api_key_path ./AppStoreConnectKey.json \
-            --skip_waiting_for_build_processing true
-      
+          bundle exec fastlane upload
