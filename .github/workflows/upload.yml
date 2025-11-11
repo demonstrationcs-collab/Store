@@ -23,7 +23,12 @@ jobs:
 
       - name: Install Fastlane
         run: sudo gem install fastlane
-
+        
+      - name: Créer le fichier AuthKey.p8
+        run: |
+          echo "${{ secrets.APP_STORE_CONNECT_KEY }}" > AuthKey.p8
+        shell: bash
+        
       - name: Verify versions
         run: |
           ruby -v
