@@ -20,21 +20,15 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.4
-          bundler-cache: true
-
-      # 🧩 Installer Fastlane
-      - name: Install Fastlane
-        run: |
-          sudo gem uninstall fastlane -aIx || true
-          sudo gem install fastlane -v 2.228.0 --no-document
+          bundler-cache: true  # ⚡ installe automatiquement les gems du Gemfile
 
       - name: Verify versions
         run: |
           ruby -v
           openssl version
-          fastlane --version
+          bundle exec fastlane --version
 
-      # 🚀 Upload vers TestFlight
+      # 🚀 Uploader l'IPA vers TestFlight via Fastlane (avec Bundler)
       - name: Upload IPA to TestFlight
         run: |
           bundle exec fastlane upload
