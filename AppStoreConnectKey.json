@@ -1,6 +1,6 @@
 {
   "key_id": "T2UYXHKS9S",
   "issuer_id": "69a6de93-f682-47e3-e053-5b8c7c11a4d1",
-  "key": "nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQguvze64wzVyi7+bbz2W4kmhyfFG0D7wOffWbTi4SxTbSgCgYIKoZIzj0DAQehRANCAATkeFw3Ke2GlKWNqvmpUJWPSVDtcKJd25eL6Dom/a3+fNzJL2VQ85vhBfUUjHfT2qLkTFG6NKqlKFI5rTwbjYFk",
-   "is_key_content_base64": "true"
+  "key": "-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQguvze64wzVyi7+bbz\n2W4kmhyfFG0D7wOffWbTi4SxTbSgCgYIKoZIzj0DAQehRANCAATkeFw3Ke2GlKWN\nqvmpUJWPSVDtcKJd25eL6Dom/a3+fNzJL2VQ85vhBfUUjHfT2qLkTFG6NKqlKFI5\nrTwbjYFk\n-----END PRIVATE KEY-----",
+  "is_key_content_base64": false
 }
