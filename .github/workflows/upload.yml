@@ -26,7 +26,7 @@ jobs:
       - name: Créer le fichier AuthKey.p8
         run: |
           echo "${{ secrets.APP_STORE_CONNECT_KEY }}" | base64 --decode > AuthKey.p8
-          shell: bash
+        shell: bash
         
       - name: Verify versions
         run: |
