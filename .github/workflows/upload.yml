@@ -6,32 +6,42 @@ on:
 jobs:
   upload:
     runs-on: macos-latest
-    - name: Debug API Key values
-      run: |
-        echo "Key ID: $APP_STORE_CONNECT_API_KEY_ID"
-        echo "Issuer ID: $APP_STORE_CONNECT_API_ISSUER_ID"
-        echo "Key content length: ${#APP_STORE_CONNECT_API_KEY_CONTENT}"
+
     env:
       APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
       APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
       APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+
     steps:
-      # - name: Checkout project
+      - name: Checkout project
         uses: actions/checkout@v4
 
-      - name: Setup Ruby (3.1.4)
+      - name: Setup Ruby (3.2.2)
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2.2
 
       - name: Install Fastlane
         run: sudo gem install fastlane
-        
+
       - name: Verify versions
         run: |
           ruby -v
           fastlane -v
 
-      - name: Upload IPA to TestFlight
+      - name: Debug API Key values
         run: |
-          fastlane upload
+          echo "Key ID: $APP_STORE_CONNECT_API_KEY_ID"
+          echo "Issuer ID: $APP_STORE_CONNECT_API_ISSUER_ID"
+          echo "Key content length: ${#APP_STORE_CONNECT_API_KEY_CONTENT}"
+
+      - name: Prepare API Key file
+        run: |
+          echo "$APP_STORE_CONNECT_API_KEY_CONTENT" | sed 's/\\n/\n/g' > AuthKey.p8
+
+      - name: Upload IPA to TestFlight
+        run: fastlane upload
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
